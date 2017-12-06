@@ -1,0 +1,33 @@
+type: install
+version: 1.4
+name: Xonotic Server
+categories: []
+displayName: Xonotic Server
+homepage: http://www.xonotic.org/
+logo: https://assets.gitlab-static.net/xonotic/xonotic/raw/12105b36a21e7472f72933b6dd409465b5133396/misc/logos/icons_png/xonotic_48.png
+description: Game server for Xonotic
+
+settings:
+  fields:
+  - type: string
+    name: SERVER_NAME
+    caption: Server name
+    placeholder: Xonotic server of ${user.name}
+    default: Xonotic server of ${user.name}
+
+nodes:
+  - image: 5ika/xonotic
+    count: 1
+    fixedCloudlets: 4
+    cloudlets: 32
+    nodeGroup: cp
+    volumes:
+      - /opt/Xonotic
+      - /opt/Xonotic/data/server.cfg
+
+# onInstall:
+#  -
+
+success: |
+  ## Server ready !
+  You can start to play using this server address : `${env.domain}`
