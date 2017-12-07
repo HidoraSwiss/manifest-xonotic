@@ -14,6 +14,14 @@ settings:
     caption: Server name
     placeholder: Xonotic server of ${user.name}
     default: Xonotic server of ${user.name}
+  - type: numberpicker
+    name: MAX_PLAYER
+    caption: Max players
+    placeholder: 8
+    default: 8
+    min: 2
+    max: 32
+    editable: true
 
 nodes:
   - image: 5ika/xonotic
@@ -25,9 +33,22 @@ nodes:
       - /opt/Xonotic
       - /opt/Xonotic/data/server.cfg
 
-# onInstall:
-#  -
+onInstall:
+  - cmd[cp]:
+    - wget -O /opt/Xonotic/data/server.cfg https://raw.githubusercontent.com/HidoraSwiss/manifest-xonotic/master/server.cfg
+    - sed -i "s/SERVER_NAME/${globals.SERVER_NAME}/g"
+    - sed -i "s/HOSTER/${env.domain}/g"
+    - sed -i "s/MAX_PLAYER/${globals.MAX_PLAYER{/g"
+  - api:
+    - method: environment.control.AddEndpoint
+      params:
+        nodeId: ${nodes.cp[0].id}
+        privatePort: 26000
+        protocol: udp
+        name: Xonotic port
+        
 
 success: |
   ## Server ready !
   You can start to play using this server address : `${env.domain}`
+  Server port : ${nodes.cp[0].endpoints[0].publicPort}
