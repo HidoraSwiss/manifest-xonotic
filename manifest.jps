@@ -36,9 +36,9 @@ nodes:
 onInstall:
   - cmd[cp]:
     - wget -O /opt/Xonotic/data/server.cfg https://raw.githubusercontent.com/HidoraSwiss/manifest-xonotic/master/server.cfg
-    - sed -i "s/SERVER_NAME/${globals.SERVER_NAME}/g"
-    - sed -i "s/HOSTER/${env.domain}/g"
-    - sed -i "s/MAX_PLAYER/${globals.MAX_PLAYER{/g"
+    - sed -i "s/SERVER_NAME/${settings.SERVER_NAME}/g" /opt/Xonotic/data/server.cfg
+    - sed -i "s/HOSTER/${env.domain}/g" /opt/Xonotic/data/server.cfg
+    - sed -i "s/MAX_PLAYER/${settings.MAX_PLAYER}/g" /opt/Xonotic/data/server.cfg
   - api:
     - method: environment.control.AddEndpoint
       params:
