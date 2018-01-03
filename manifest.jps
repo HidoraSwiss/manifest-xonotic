@@ -29,6 +29,8 @@ nodes:
     fixedCloudlets: 4
     cloudlets: 32
     nodeGroup: cp
+    env:
+      JELASTIC_EXPOSE: 26000
     volumes:
       - /opt/Xonotic
       - /opt/Xonotic/data/server.cfg
@@ -36,9 +38,9 @@ nodes:
 onInstall:
   - cmd[cp]:
     - wget -O /opt/Xonotic/data/server.cfg https://raw.githubusercontent.com/HidoraSwiss/manifest-xonotic/master/server.cfg
-    - sed -i "s/SERVER_NAME/${globals.SERVER_NAME}/g"
-    - sed -i "s/HOSTER/${env.domain}/g"
-    - sed -i "s/MAX_PLAYER/${globals.MAX_PLAYER{/g"
+    - sed -i "s/SERVER_NAME/${globals.SERVER_NAME}/g" /opt/Xonotic/data/server.cfg
+    - sed -i "s/HOSTER/${env.domain}/g" /opt/Xonotic/data/server.cfg
+    - sed -i "s/MAX_PLAYER/${globals.MAX_PLAYER{/g" /opt/Xonotic/data/server.cfg
   - api:
     - method: environment.control.AddEndpoint
       params:
@@ -46,7 +48,7 @@ onInstall:
         privatePort: 26000
         protocol: udp
         name: Xonotic port
-        
+
 
 success: |
   ## Server ready !
