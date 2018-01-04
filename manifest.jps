@@ -1,7 +1,6 @@
 type: install
 version: 1.4
 name: Xonotic Server
-categories: []
 displayName: Xonotic Server
 homepage: http://www.xonotic.org/
 logo: https://assets.gitlab-static.net/xonotic/xonotic/raw/12105b36a21e7472f72933b6dd409465b5133396/misc/logos/icons_png/xonotic_48.png
@@ -46,9 +45,12 @@ onInstall:
         protocol: UDP
         port: 26000
         name: Xonotic server
-        text: Use this address to connect to your Xonotic server :
+        text: "Use this address to connect to your Xonotic server :"
       type: js
 
 success: |
-  ## Your Xonotic server is ready !
+  # Your Xonotic server is ready !
   The information for connection has been sent to you by e-mail
+
+  ## Configuration
+  If the default configuration doesn't suit you, you can modify the config file `/opt/Xonotic/data/server.cfg` and restart the Xonotic node.
