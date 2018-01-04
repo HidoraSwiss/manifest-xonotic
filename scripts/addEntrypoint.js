@@ -5,7 +5,7 @@ var envName = "${env.envName}";
 
 var resp = jelastic.env.control.AddEndpoint(
   envName,
-  session,
+  getParam("session"),
   nodeId,
   port,
   "UDP",
@@ -26,7 +26,7 @@ Please use the following server address to connect your server : ${url}.`;
 resp = scripting.eval({
   script: "InstallApp",
   targetAppid: "${env.appid}",
-  session: session,
+  session: getParam("session"),
   manifest: {
     jpsType: "update",
     application: {
