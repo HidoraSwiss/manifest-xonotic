@@ -40,13 +40,15 @@ onInstall:
     - sed -i "s/HOSTER/${env.domain}/g" /opt/Xonotic/data/server.cfg
     - sed -i "s/MAX_PLAYER/${settings.MAX_PLAYER}/g" /opt/Xonotic/data/server.cfg
   - script:
-      - script: https://raw.githubusercontent.com/HidoraSwiss/manifest-xonotic/master/scripts/addEntrypoint.js
-        params:
-          nodeId: ${nodes.cp.first.id}
-          port: 26000
-
+      script: https://raw.githubusercontent.com/HidoraSwiss/manifest-utilities/master/scripts/addEndpoint.js
+      params:
+        nodeId: ${nodes.cp.first.id}
+        protocol: UDP
+        port: 26000
+        name: Xonotic server
+        text: Use this address to connect to your Xonotic server :
+      type: js
 
 success: |
-  ## Server ready !
-  You can start to play using this server address : `${env.domain}`
-  Server port : ${nodes.cp[0].endpoints[0].publicPort}
+  ## Your Xonotic server is ready !
+  The information for connection has been sent to you by e-mail
